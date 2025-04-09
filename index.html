@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加密貨幣資訊網</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-coins"></i>
+                加密貨幣資訊網
+            </div>
+            <div class="search-container">
+                <input type="text" id="crypto-search" placeholder="搜索加密貨幣...">
+                <button onclick="searchCrypto()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <ul>
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> 首頁</a></li>
+                <li><a href="#market"><i class="fas fa-chart-line"></i> 市場</a></li>
+                <li><a href="#news"><i class="fas fa-newspaper"></i> 新聞</a></li>
+                <li><a href="#portfolio"><i class="fas fa-wallet"></i> 投資組合</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>即時加密貨幣行情</h1>
+            <div class="crypto-grid">
+                <div class="crypto-card">
+                    <div class="crypto-icon">
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                    <h2>比特幣 (BTC)</h2>
+                    <p class="price">$45,000</p>
+                    <p class="change positive"><i class="fas fa-arrow-up"></i> +2.5%</p>
+                    <div class="crypto-chart">
+                        <canvas id="btcChart"></canvas>
+                    </div>
+                </div>
+                <div class="crypto-card">
+                    <div class="crypto-icon">
+                        <i class="fab fa-ethereum"></i>
+                    </div>
+                    <h2>以太幣 (ETH)</h2>
+                    <p class="price">$3,200</p>
+                    <p class="change positive"><i class="fas fa-arrow-up"></i> +1.8%</p>
+                    <div class="crypto-chart">
+                        <canvas id="ethChart"></canvas>
+                    </div>
+                </div>
+                <div class="crypto-card">
+                    <div class="crypto-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h2>幣安幣 (BNB)</h2>
+                    <p class="price">$420</p>
+                    <p class="change negative"><i class="fas fa-arrow-down"></i> -0.5%</p>
+                    <div class="crypto-chart">
+                        <canvas id="bnbChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="market-overview">
+            <h2>市場概況</h2>
+            <div class="market-stats">
+                <div class="stat-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>總市值</h3>
+                    <p>$2.1T</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>24h 交易量</h3>
+                    <p>$120B</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fab fa-bitcoin"></i>
+                    <h3>比特幣主導率</h3>
+                    <p>42%</p>
+                </div>
+            </div>
+            <div class="market-chart">
+                <canvas id="marketChart"></canvas>
+            </div>
+        </section>
+
+        <section id="news" class="news">
+            <h2>最新新聞</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/300x200" alt="新聞圖片">
+                    </div>
+                    <div class="news-content">
+                        <h3>比特幣突破45,000美元大關</h3>
+                        <p class="news-date">2024-04-09</p>
+                        <p>比特幣價格今日突破45,000美元，創下近期新高，市場信心持續增強...</p>
+                        <a href="#" class="read-more">閱讀更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/300x200" alt="新聞圖片">
+                    </div>
+                    <div class="news-content">
+                        <h3>以太坊2.0升級在即</h3>
+                        <p class="news-date">2024-04-09</p>
+                        <p>以太坊即將完成重大升級，預計將提升網絡效能，降低交易費用...</p>
+                        <a href="#" class="read-more">閱讀更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio">
+            <h2>我的投資組合</h2>
+            <div class="portfolio-summary">
+                <div class="portfolio-value">
+                    <h3>總資產價值</h3>
+                    <p class="total-value">$50,000</p>
+                    <p class="change positive">+5.2% 今日</p>
+                </div>
+                <div class="portfolio-chart">
+                    <canvas id="portfolioChart"></canvas>
+                </div>
+            </div>
+            <div class="portfolio-assets">
+                <h3>資產明細</h3>
+                <table class="assets-table">
+                    <thead>
+                        <tr>
+                            <th>幣種</th>
+                            <th>持有數量</th>
+                            <th>價值</th>
+                            <th>24h 變化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>比特幣 (BTC)</td>
+                            <td>0.5</td>
+                            <td>$22,500</td>
+                            <td class="positive">+2.5%</td>
+                        </tr>
+                        <tr>
+                            <td>以太幣 (ETH)</td>
+                            <td>5</td>
+                            <td>$16,000</td>
+                            <td class="positive">+1.8%</td>
+                        </tr>
+                        <tr>
+                            <td>幣安幣 (BNB)</td>
+                            <td>20</td>
+                            <td>$8,400</td>
+                            <td class="negative">-0.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>關於我們</h4>
+                <p>提供最即時的加密貨幣市場資訊和新聞</p>
+            </div>
+            <div class="footer-section">
+                <h4>快速連結</h4>
+                <ul>
+                    <li><a href="#home">首頁</a></li>
+                    <li><a href="#market">市場</a></li>
+                    <li><a href="#news">新聞</a></li>
+                    <li><a href="#portfolio">投資組合</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>關注我們</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 加密貨幣資訊網. 保留所有權利.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
