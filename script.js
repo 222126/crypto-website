@@ -183,28 +183,29 @@ function updatePrices() {
         .then(response => response.json())
         .then(prices => {
             // Update BTC
-            document.querySelector('.crypto-card:nth-child(1) .price').textContent = `$${prices.BTC.price.toLocaleString()}`;
+            const btcCard = document.querySelector('.crypto-card:nth-child(1)');
+            btcCard.querySelector('.price').textContent = `$${prices.BTC.price.toLocaleString()}`;
             updateChangeIndicator(1, prices.BTC.change);
+            
+            // Update BTC additional info
+            btcCard.querySelector('.volume').textContent = `24h Volume: $${prices.BTC.volume.toLocaleString()}`;
+            btcCard.querySelector('.high-low').textContent = 
+                `High: $${prices.BTC.high.toLocaleString()} | Low: $${prices.BTC.low.toLocaleString()}`;
 
             // Update ETH
-            document.querySelector('.crypto-card:nth-child(2) .price').textContent = `$${prices.ETH.price.toLocaleString()}`;
+            const ethCard = document.querySelector('.crypto-card:nth-child(2)');
+            ethCard.querySelector('.price').textContent = `$${prices.ETH.price.toLocaleString()}`;
             updateChangeIndicator(2, prices.ETH.change);
+            
+            // Update ETH additional info
+            ethCard.querySelector('.volume').textContent = `24h Volume: $${prices.ETH.volume.toLocaleString()}`;
+            ethCard.querySelector('.high-low').textContent = 
+                `High: $${prices.ETH.high.toLocaleString()} | Low: $${prices.ETH.low.toLocaleString()}`;
 
-            // Update BNB
-            document.querySelector('.crypto-card:nth-child(3) .price').textContent = `$${prices.BNB.price.toLocaleString()}`;
-            updateChangeIndicator(3, prices.BNB.change);
-
-            // Update XRP
-            document.querySelector('.crypto-card:nth-child(4) .price').textContent = `$${prices.XRP.price.toLocaleString()}`;
-            updateChangeIndicator(4, prices.XRP.change);
-
-            // Update ADA
-            document.querySelector('.crypto-card:nth-child(5) .price').textContent = `$${prices.ADA.price.toLocaleString()}`;
-            updateChangeIndicator(5, prices.ADA.change);
-
-            // Update SOL
-            document.querySelector('.crypto-card:nth-child(6) .price').textContent = `$${prices.SOL.price.toLocaleString()}`;
-            updateChangeIndicator(6, prices.SOL.change);
+            // Update timestamp
+            const timestamp = new Date(prices.timestamp);
+            document.querySelector('.last-updated').textContent = 
+                `Last Updated: ${timestamp.toLocaleString()}`;
         })
         .catch(error => console.error('Error updating prices:', error));
 }

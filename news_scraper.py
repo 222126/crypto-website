@@ -8,13 +8,18 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def scrape_news():
-    # CoinGecko API endpoint for news
-    url = "https://api.coingecko.com/api/v3/news"
+    # CoinDesk API endpoint
+    url = "https://api.coindesk.com/v1/news"
+    
+    # API key
+    headers = {
+        "Authorization": "Bearer ef319ef94d30f1392c60a62f6b693720b052dab8f07ff80d0543a35b78b13f08"
+    }
     
     try:
-        logger.info("Making request to CoinGecko API...")
+        logger.info("Making request to CoinDesk API...")
         # Make the API request
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         logger.info(f"Response status code: {response.status_code}")
         
         # Check if the request was successful
@@ -30,14 +35,10 @@ def scrape_news():
         # Format the articles
         formatted_articles = []
         for article in data.get('data', [])[:5]:  # Get first 5 articles
-            # Convert timestamp to readable date
-            date = datetime.fromtimestamp(article.get('published_at', 0))
-            formatted_date = date.strftime('%Y-%m-%d %H:%M')
-            
             formatted_article = {
                 'title': article.get('title', 'No title'),
                 'link': article.get('url', '#'),
-                'date': formatted_date,
+                'date': article.get('publishedAt', datetime.now().isoformat()),
                 'desc': article.get('description', 'No description')
             }
             formatted_articles.append(formatted_article)
