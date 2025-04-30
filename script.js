@@ -11,102 +11,115 @@ function searchCrypto() {
     }
 }
 
-// 初始化圖表
+// Initialize all cryptocurrency charts
 function initCharts() {
-    // 比特幣圖表
+    // Common chart options
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            x: {
+                display: false
+            },
+            y: {
+                display: false
+            }
+        }
+    };
+
+    // BTC Chart
     const btcCtx = document.getElementById('btcChart').getContext('2d');
     new Chart(btcCtx, {
         type: 'line',
         data: {
             labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
             datasets: [{
-                label: 'BTC 價格',
                 data: [40000, 42000, 41000, 43000, 44000, 45000],
                 borderColor: '#f7931a',
                 tension: 0.4
             }]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    display: false
-                },
-                y: {
-                    display: false
-                }
-            }
-        }
+        options: chartOptions
     });
 
-    // 以太幣圖表
+    // ETH Chart
     const ethCtx = document.getElementById('ethChart').getContext('2d');
     new Chart(ethCtx, {
         type: 'line',
         data: {
             labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
             datasets: [{
-                label: 'ETH 價格',
                 data: [2800, 2900, 3000, 3100, 3150, 3200],
                 borderColor: '#627eea',
                 tension: 0.4
             }]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    display: false
-                },
-                y: {
-                    display: false
-                }
-            }
-        }
+        options: chartOptions
     });
 
-    // 幣安幣圖表
+    // BNB Chart
     const bnbCtx = document.getElementById('bnbChart').getContext('2d');
     new Chart(bnbCtx, {
         type: 'line',
         data: {
             labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
             datasets: [{
-                label: 'BNB 價格',
                 data: [400, 410, 420, 415, 418, 420],
                 borderColor: '#f3ba2f',
                 tension: 0.4
             }]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    display: false
-                },
-                y: {
-                    display: false
-                }
-            }
-        }
+        options: chartOptions
+    });
+
+    // XRP Chart
+    const xrpCtx = document.getElementById('xrpChart').getContext('2d');
+    new Chart(xrpCtx, {
+        type: 'line',
+        data: {
+            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+            datasets: [{
+                data: [0.45, 0.48, 0.47, 0.50, 0.52, 0.55],
+                borderColor: '#23292f',
+                tension: 0.4
+            }]
+        },
+        options: chartOptions
+    });
+
+    // ADA Chart
+    const adaCtx = document.getElementById('adaChart').getContext('2d');
+    new Chart(adaCtx, {
+        type: 'line',
+        data: {
+            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+            datasets: [{
+                data: [0.35, 0.38, 0.40, 0.42, 0.43, 0.45],
+                borderColor: '#0033ad',
+                tension: 0.4
+            }]
+        },
+        options: chartOptions
+    });
+
+    // SOL Chart
+    const solCtx = document.getElementById('solChart').getContext('2d');
+    new Chart(solCtx, {
+        type: 'line',
+        data: {
+            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+            datasets: [{
+                data: [85, 88, 90, 92, 94, 95],
+                borderColor: '#00ffbd',
+                tension: 0.4
+            }]
+        },
+        options: chartOptions
     });
 
     // 市場概況圖表
@@ -164,8 +177,57 @@ function initCharts() {
     });
 }
 
-// 頁面加載完成後初始化圖表
-document.addEventListener('DOMContentLoaded', initCharts);
+// Function to update cryptocurrency prices
+function updatePrices() {
+    fetch('prices.json')
+        .then(response => response.json())
+        .then(prices => {
+            // Update BTC
+            document.querySelector('.crypto-card:nth-child(1) .price').textContent = `$${prices.BTC.price.toLocaleString()}`;
+            updateChangeIndicator(1, prices.BTC.change);
+
+            // Update ETH
+            document.querySelector('.crypto-card:nth-child(2) .price').textContent = `$${prices.ETH.price.toLocaleString()}`;
+            updateChangeIndicator(2, prices.ETH.change);
+
+            // Update BNB
+            document.querySelector('.crypto-card:nth-child(3) .price').textContent = `$${prices.BNB.price.toLocaleString()}`;
+            updateChangeIndicator(3, prices.BNB.change);
+
+            // Update XRP
+            document.querySelector('.crypto-card:nth-child(4) .price').textContent = `$${prices.XRP.price.toLocaleString()}`;
+            updateChangeIndicator(4, prices.XRP.change);
+
+            // Update ADA
+            document.querySelector('.crypto-card:nth-child(5) .price').textContent = `$${prices.ADA.price.toLocaleString()}`;
+            updateChangeIndicator(5, prices.ADA.change);
+
+            // Update SOL
+            document.querySelector('.crypto-card:nth-child(6) .price').textContent = `$${prices.SOL.price.toLocaleString()}`;
+            updateChangeIndicator(6, prices.SOL.change);
+        })
+        .catch(error => console.error('Error updating prices:', error));
+}
+
+// Helper function to update change indicators
+function updateChangeIndicator(cardIndex, change) {
+    const changeElement = document.querySelector(`.crypto-card:nth-child(${cardIndex}) .change`);
+    const isPositive = change >= 0;
+    
+    changeElement.className = `change ${isPositive ? 'positive' : 'negative'}`;
+    changeElement.innerHTML = `<i class="fas fa-arrow-${isPositive ? 'up' : 'down'}"></i> ${Math.abs(change).toFixed(2)}%`;
+}
+
+// Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initCharts();
+    loadNews();
+    updatePrices();
+    
+    // Set up intervals
+    setInterval(loadNews, 3600000); // Update news every hour
+    setInterval(updatePrices, 60000); // Update prices every minute
+});
 
 // 導航欄活動狀態
 document.querySelectorAll('nav a').forEach(link => {
@@ -208,11 +270,4 @@ function loadNews() {
             });
         })
         .catch(error => console.error('Error loading news:', error));
-}
-
-// Load news when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    loadNews();
-    // Refresh news every hour
-    setInterval(loadNews, 3600000);
-}); 
+} 
