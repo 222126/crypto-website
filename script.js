@@ -173,4 +173,46 @@ document.querySelectorAll('nav a').forEach(link => {
         document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
         this.classList.add('active');
     });
+});
+
+// News handling functions
+function loadNews() {
+    fetch('news.json')
+        .then(response => response.json())
+        .then(news => {
+            const newsGrid = document.getElementById('newsGrid');
+            newsGrid.innerHTML = '';
+            
+            news.forEach(article => {
+                const newsCard = document.createElement('article');
+                newsCard.className = 'news-card';
+                
+                // Format the date
+                const date = new Date(article.date);
+                const formattedDate = date.toLocaleDateString('zh-TW', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                newsCard.innerHTML = `
+                    <div class="news-content">
+                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+                        <p class="news-date">${formattedDate}</p>
+                        <p class="news-desc">${article.desc}</p>
+                    </div>
+                `;
+                newsGrid.appendChild(newsCard);
+            });
+        })
+        .catch(error => console.error('Error loading news:', error));
+}
+
+// Load news when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadNews();
+    // Refresh news every hour
+    setInterval(loadNews, 3600000);
 }); 
