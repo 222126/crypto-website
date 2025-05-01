@@ -1,180 +1,132 @@
+// 加密貨幣圖標映射
+const cryptoIcons = {
+    'BTC': 'fab fa-bitcoin',
+    'ETH': 'fab fa-ethereum',
+    'BNB': 'fas fa-coins',
+    'SOL': 'fas fa-coins',
+    'XRP': 'fas fa-coins',
+    'USDC': 'fas fa-dollar-sign',
+    'USDT': 'fas fa-dollar-sign',
+    'ADA': 'fas fa-coins',
+    'AVAX': 'fas fa-coins',
+    'DOGE': 'fas fa-dog',
+    'DOT': 'fas fa-coins',
+    'TRX': 'fas fa-coins',
+    'MATIC': 'fas fa-coins',
+    'LINK': 'fas fa-link',
+    'WBTC': 'fab fa-bitcoin',
+    'TON': 'fas fa-coins',
+    'SHIB': 'fas fa-dog',
+    'DAI': 'fas fa-dollar-sign',
+    'LTC': 'fas fa-coins',
+    'UNI': 'fas fa-coins',
+    'ATOM': 'fas fa-atom',
+    'XLM': 'fas fa-coins',
+    'BCH': 'fab fa-bitcoin',
+    'NEAR': 'fas fa-coins',
+    'XMR': 'fas fa-coins',
+    'OKB': 'fas fa-coins',
+    'FIL': 'fas fa-coins',
+    'INJ': 'fas fa-coins',
+    'APT': 'fas fa-coins',
+    'HBAR': 'fas fa-coins',
+    'VET': 'fas fa-coins',
+    'OP': 'fas fa-coins',
+    'MKR': 'fas fa-coins',
+    'CRO': 'fas fa-coins',
+    'RUNE': 'fas fa-coins',
+    'KAS': 'fas fa-coins',
+    'GRT': 'fas fa-coins',
+    'PEPE': 'fas fa-frog',
+    'THETA': 'fas fa-coins',
+    'FTM': 'fas fa-coins',
+    'RNDR': 'fas fa-coins',
+    'AAVE': 'fas fa-coins',
+    'QNT': 'fas fa-coins',
+    'ALGO': 'fas fa-coins',
+    'ARB': 'fas fa-coins',
+    'STX': 'fas fa-coins',
+    'FLOW': 'fas fa-coins',
+    'EGLD': 'fas fa-coins',
+    'EOS': 'fas fa-coins',
+    'XTZ': 'fas fa-coins'
+};
+
+// 加密貨幣名稱映射
+const cryptoNames = {
+    'BTC': '比特幣',
+    'ETH': '以太幣',
+    'BNB': '幣安幣',
+    'SOL': '索拉納',
+    'XRP': '瑞波幣',
+    'USDC': 'USD Coin',
+    'USDT': 'Tether',
+    'ADA': '卡爾達諾',
+    'AVAX': '雪崩協議',
+    'DOGE': '狗狗幣',
+    'DOT': '波卡',
+    'TRX': '波場',
+    'MATIC': 'Polygon',
+    'LINK': 'Chainlink',
+    'WBTC': 'Wrapped Bitcoin',
+    'TON': 'Toncoin',
+    'SHIB': '柴犬幣',
+    'DAI': 'Dai',
+    'LTC': '萊特幣',
+    'UNI': 'Uniswap',
+    'ATOM': 'Cosmos',
+    'XLM': '恆星幣',
+    'BCH': '比特幣現金',
+    'NEAR': 'NEAR Protocol',
+    'XMR': '門羅幣',
+    'OKB': 'OKB',
+    'FIL': 'Filecoin',
+    'INJ': 'Injective',
+    'APT': 'Aptos',
+    'HBAR': 'Hedera',
+    'VET': '唯鏈',
+    'OP': 'Optimism',
+    'MKR': 'Maker',
+    'CRO': 'Cronos',
+    'RUNE': 'THORChain',
+    'KAS': 'Kaspa',
+    'GRT': 'The Graph',
+    'PEPE': 'Pepe',
+    'THETA': 'Theta Network',
+    'FTM': 'Fantom',
+    'RNDR': 'Render',
+    'AAVE': 'Aave',
+    'QNT': 'Quant',
+    'ALGO': 'Algorand',
+    'ARB': 'Arbitrum',
+    'STX': 'Stacks',
+    'FLOW': 'Flow',
+    'EGLD': 'Elrond',
+    'EOS': 'EOS',
+    'XTZ': 'Tezos'
+};
+
 // 搜索功能
 function searchCrypto() {
     const searchInput = document.getElementById('crypto-search');
     const searchTerm = searchInput.value.trim().toLowerCase();
     
     if (searchTerm) {
-        // 這裡可以添加搜索邏輯
-        alert('搜索功能即將推出！');
+        const cryptoGrid = document.getElementById('cryptoGrid');
+        const cards = cryptoGrid.getElementsByClassName('crypto-card');
+        
+        Array.from(cards).forEach(card => {
+            const name = card.querySelector('h2').textContent.toLowerCase();
+            if (name.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     } else {
-        alert('請輸入搜索內容');
+        const cards = document.getElementsByClassName('crypto-card');
+        Array.from(cards).forEach(card => card.style.display = '');
     }
-}
-
-// Initialize all cryptocurrency charts
-function initCharts() {
-    // Common chart options
-    const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            x: {
-                display: false
-            },
-            y: {
-                display: false
-            }
-        }
-    };
-
-    // BTC Chart
-    const btcCtx = document.getElementById('btcChart').getContext('2d');
-    new Chart(btcCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                data: [40000, 42000, 41000, 43000, 44000, 45000],
-                borderColor: '#f7931a',
-                tension: 0.4
-            }]
-        },
-        options: chartOptions
-    });
-
-    // ETH Chart
-    const ethCtx = document.getElementById('ethChart').getContext('2d');
-    new Chart(ethCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                data: [2800, 2900, 3000, 3100, 3150, 3200],
-                borderColor: '#627eea',
-                tension: 0.4
-            }]
-        },
-        options: chartOptions
-    });
-
-    // BNB Chart
-    const bnbCtx = document.getElementById('bnbChart').getContext('2d');
-    new Chart(bnbCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                data: [400, 410, 420, 415, 418, 420],
-                borderColor: '#f3ba2f',
-                tension: 0.4
-            }]
-        },
-        options: chartOptions
-    });
-
-    // XRP Chart
-    const xrpCtx = document.getElementById('xrpChart').getContext('2d');
-    new Chart(xrpCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                data: [0.45, 0.48, 0.47, 0.50, 0.52, 0.55],
-                borderColor: '#23292f',
-                tension: 0.4
-            }]
-        },
-        options: chartOptions
-    });
-
-    // ADA Chart
-    const adaCtx = document.getElementById('adaChart').getContext('2d');
-    new Chart(adaCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                data: [0.35, 0.38, 0.40, 0.42, 0.43, 0.45],
-                borderColor: '#0033ad',
-                tension: 0.4
-            }]
-        },
-        options: chartOptions
-    });
-
-    // SOL Chart
-    const solCtx = document.getElementById('solChart').getContext('2d');
-    new Chart(solCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                data: [85, 88, 90, 92, 94, 95],
-                borderColor: '#00ffbd',
-                tension: 0.4
-            }]
-        },
-        options: chartOptions
-    });
-
-    // 市場概況圖表
-    const marketCtx = document.getElementById('marketChart').getContext('2d');
-    new Chart(marketCtx, {
-        type: 'line',
-        data: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
-            datasets: [{
-                label: '總市值',
-                data: [1.8, 1.9, 2.0, 2.05, 2.08, 2.1],
-                borderColor: '#3498db',
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: false,
-                    ticks: {
-                        callback: function(value) {
-                            return '$' + value + 'T';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // 投資組合圖表
-    const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
-    new Chart(portfolioCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['比特幣', '以太幣', '幣安幣'],
-            datasets: [{
-                data: [22500, 16000, 8400],
-                backgroundColor: ['#f7931a', '#627eea', '#f3ba2f']
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }
-    });
 }
 
 // Function to update cryptocurrency prices
@@ -182,51 +134,94 @@ function updatePrices() {
     fetch('prices.json')
         .then(response => response.json())
         .then(prices => {
-            // Update BTC
-            const btcCard = document.querySelector('.crypto-card:nth-child(1)');
-            btcCard.querySelector('.price').textContent = `$${prices.BTC.price.toLocaleString()}`;
-            updateChangeIndicator(1, prices.BTC.change);
+            const cryptoGrid = document.getElementById('cryptoGrid');
+            cryptoGrid.innerHTML = '';
             
-            // Update BTC additional info
-            btcCard.querySelector('.volume').textContent = `24h Volume: $${prices.BTC.volume.toLocaleString()}`;
-            btcCard.querySelector('.high-low').textContent = 
-                `High: $${prices.BTC.high.toLocaleString()} | Low: $${prices.BTC.low.toLocaleString()}`;
-
-            // Update ETH
-            const ethCard = document.querySelector('.crypto-card:nth-child(2)');
-            ethCard.querySelector('.price').textContent = `$${prices.ETH.price.toLocaleString()}`;
-            updateChangeIndicator(2, prices.ETH.change);
+            let totalMarketCap = 0;
+            let totalVolume = 0;
+            let btcMarketCap = 0;
             
-            // Update ETH additional info
-            ethCard.querySelector('.volume').textContent = `24h Volume: $${prices.ETH.volume.toLocaleString()}`;
-            ethCard.querySelector('.high-low').textContent = 
-                `High: $${prices.ETH.high.toLocaleString()} | Low: $${prices.ETH.low.toLocaleString()}`;
-
+            prices.forEach(crypto => {
+                totalMarketCap += crypto.market_cap;
+                totalVolume += crypto.volume_24h;
+                if (crypto.symbol === 'BTC') {
+                    btcMarketCap = crypto.market_cap;
+                }
+                
+                const card = document.createElement('div');
+                card.className = 'crypto-card';
+                
+                const iconClass = cryptoIcons[crypto.symbol] || 'fas fa-coins';
+                const name = cryptoNames[crypto.symbol] || crypto.symbol;
+                
+                card.innerHTML = `
+                    <div class="crypto-icon">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <h2>${name} (${crypto.symbol})</h2>
+                    <p class="price">$${crypto.price.toLocaleString()}</p>
+                    <p class="change ${crypto.change_24h >= 0 ? 'positive' : 'negative'}">
+                        <i class="fas fa-arrow-${crypto.change_24h >= 0 ? 'up' : 'down'}"></i> 
+                        ${Math.abs(crypto.change_24h).toFixed(2)}%
+                    </p>
+                    <p class="volume">24h Volume: $${crypto.volume_24h.toLocaleString()}</p>
+                    <p class="high-low">
+                        High: $${crypto.high_24h.toLocaleString()} | 
+                        Low: $${crypto.low_24h.toLocaleString()}
+                    </p>
+                    <div class="crypto-chart">
+                        <canvas id="${crypto.symbol.toLowerCase()}Chart"></canvas>
+                    </div>
+                `;
+                
+                cryptoGrid.appendChild(card);
+                
+                // Initialize chart
+                const ctx = card.querySelector('canvas').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                        datasets: [{
+                            data: Array(6).fill().map(() => crypto.price * (1 + (Math.random() - 0.5) * 0.1)),
+                            borderColor: crypto.change_24h >= 0 ? '#2ecc71' : '#e74c3c',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: { display: false },
+                            y: { display: false }
+                        }
+                    }
+                });
+            });
+            
+            // Update market stats
+            document.getElementById('totalMarketCap').textContent = 
+                `$${(totalMarketCap / 1e12).toFixed(2)}T`;
+            document.getElementById('totalVolume').textContent = 
+                `$${(totalVolume / 1e9).toFixed(2)}B`;
+            document.getElementById('btcDominance').textContent = 
+                `${((btcMarketCap / totalMarketCap) * 100).toFixed(1)}%`;
+            
             // Update timestamp
-            const timestamp = new Date(prices.timestamp);
             document.querySelector('.last-updated').textContent = 
-                `Last Updated: ${timestamp.toLocaleString()}`;
+                `Last Updated: ${new Date().toLocaleString()}`;
         })
         .catch(error => console.error('Error updating prices:', error));
 }
 
-// Helper function to update change indicators
-function updateChangeIndicator(cardIndex, change) {
-    const changeElement = document.querySelector(`.crypto-card:nth-child(${cardIndex}) .change`);
-    const isPositive = change >= 0;
-    
-    changeElement.className = `change ${isPositive ? 'positive' : 'negative'}`;
-    changeElement.innerHTML = `<i class="fas fa-arrow-${isPositive ? 'up' : 'down'}"></i> ${Math.abs(change).toFixed(2)}%`;
-}
-
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    initCharts();
-    loadNews();
     updatePrices();
-    
-    // Set up intervals
-    setInterval(loadNews, 3600000); // Update news every hour
     setInterval(updatePrices, 60000); // Update prices every minute
 });
 
@@ -250,8 +245,7 @@ function loadNews() {
                 const newsCard = document.createElement('article');
                 newsCard.className = 'news-card';
                 
-                // Format the date
-                const date = new Date(article.date);
+                const date = new Date(article.published_at * 1000);
                 const formattedDate = date.toLocaleDateString('zh-TW', {
                     year: 'numeric',
                     month: 'long',
@@ -262,11 +256,17 @@ function loadNews() {
                 
                 newsCard.innerHTML = `
                     <div class="news-content">
-                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
-                        <p class="news-date">${formattedDate}</p>
-                        <p class="news-desc">${article.desc}</p>
+                        <a href="${article.link}" target="_blank">
+                            <h3>${article.title}</h3>
+                        </a>
+                        <p class="news-snippet">${article.snippet}</p>
+                        <div class="news-meta">
+                            <span class="news-source">${article.source}</span>
+                            <span class="news-date">${formattedDate}</span>
+                        </div>
                     </div>
                 `;
+                
                 newsGrid.appendChild(newsCard);
             });
         })

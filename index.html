@@ -33,77 +33,8 @@
         <section id="home" class="hero">
             <h1>即時加密貨幣行情</h1>
             <p class="last-updated">Last Updated: Loading...</p>
-            <div class="crypto-grid">
-                <div class="crypto-card">
-                    <div class="crypto-icon">
-                        <i class="fab fa-bitcoin"></i>
-                    </div>
-                    <h2>比特幣 (BTC)</h2>
-                    <p class="price">$45,000</p>
-                    <p class="change positive"><i class="fas fa-arrow-up"></i> +2.5%</p>
-                    <p class="volume">24h Volume: $0</p>
-                    <p class="high-low">High: $0 | Low: $0</p>
-                    <div class="crypto-chart">
-                        <canvas id="btcChart"></canvas>
-                    </div>
-                </div>
-                <div class="crypto-card">
-                    <div class="crypto-icon">
-                        <i class="fab fa-ethereum"></i>
-                    </div>
-                    <h2>以太幣 (ETH)</h2>
-                    <p class="price">$3,200</p>
-                    <p class="change positive"><i class="fas fa-arrow-up"></i> +1.8%</p>
-                    <p class="volume">24h Volume: $0</p>
-                    <p class="high-low">High: $0 | Low: $0</p>
-                    <div class="crypto-chart">
-                        <canvas id="ethChart"></canvas>
-                    </div>
-                </div>
-                <div class="crypto-card">
-                    <div class="crypto-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h2>幣安幣 (BNB)</h2>
-                    <p class="price">$420</p>
-                    <p class="change negative"><i class="fas fa-arrow-down"></i> -0.5%</p>
-                    <div class="crypto-chart">
-                        <canvas id="bnbChart"></canvas>
-                    </div>
-                </div>
-                <div class="crypto-card">
-                    <div class="crypto-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h2>瑞波幣 (XRP)</h2>
-                    <p class="price">$0.55</p>
-                    <p class="change positive"><i class="fas fa-arrow-up"></i> +1.2%</p>
-                    <div class="crypto-chart">
-                        <canvas id="xrpChart"></canvas>
-                    </div>
-                </div>
-                <div class="crypto-card">
-                    <div class="crypto-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h2>卡爾達諾 (ADA)</h2>
-                    <p class="price">$0.45</p>
-                    <p class="change positive"><i class="fas fa-arrow-up"></i> +0.8%</p>
-                    <div class="crypto-chart">
-                        <canvas id="adaChart"></canvas>
-                    </div>
-                </div>
-                <div class="crypto-card">
-                    <div class="crypto-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h2>索拉納 (SOL)</h2>
-                    <p class="price">$95</p>
-                    <p class="change negative"><i class="fas fa-arrow-down"></i> -1.2%</p>
-                    <div class="crypto-chart">
-                        <canvas id="solChart"></canvas>
-                    </div>
-                </div>
+            <div class="crypto-grid" id="cryptoGrid">
+                <!-- 加密貨幣卡片將由 JavaScript 動態生成 -->
             </div>
         </section>
 
@@ -113,17 +44,17 @@
                 <div class="stat-card">
                     <i class="fas fa-globe"></i>
                     <h3>總市值</h3>
-                    <p>$2.1T</p>
+                    <p id="totalMarketCap">$0</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-exchange-alt"></i>
                     <h3>24h 交易量</h3>
-                    <p>$120B</p>
+                    <p id="totalVolume">$0</p>
                 </div>
                 <div class="stat-card">
                     <i class="fab fa-bitcoin"></i>
                     <h3>比特幣主導率</h3>
-                    <p>42%</p>
+                    <p id="btcDominance">0%</p>
                 </div>
             </div>
             <div class="market-chart">
@@ -141,8 +72,8 @@
             <div class="portfolio-summary">
                 <div class="portfolio-value">
                     <h3>總資產價值</h3>
-                    <p class="total-value">$50,000</p>
-                    <p class="change positive">+5.2% 今日</p>
+                    <p class="total-value">$0</p>
+                    <p class="change">+0% 今日</p>
                 </div>
                 <div class="portfolio-chart">
                     <canvas id="portfolioChart"></canvas>
@@ -159,25 +90,8 @@
                             <th>24h 變化</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>比特幣 (BTC)</td>
-                            <td>0.5</td>
-                            <td>$22,500</td>
-                            <td class="positive">+2.5%</td>
-                        </tr>
-                        <tr>
-                            <td>以太幣 (ETH)</td>
-                            <td>5</td>
-                            <td>$16,000</td>
-                            <td class="positive">+1.8%</td>
-                        </tr>
-                        <tr>
-                            <td>幣安幣 (BNB)</td>
-                            <td>20</td>
-                            <td>$8,400</td>
-                            <td class="negative">-0.5%</td>
-                        </tr>
+                    <tbody id="portfolioTableBody">
+                        <!-- 投資組合明細將由 JavaScript 動態生成 -->
                     </tbody>
                 </table>
             </div>
